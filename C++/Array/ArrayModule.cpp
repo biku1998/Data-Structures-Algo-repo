@@ -11,23 +11,34 @@ using namespace std;
 
 class Array
 {
-public:
+private:
 	int *Ar;
 	int size;
 	int length;
 
+public:
 	// array constructor 
-	Array(int *A,int size,int length){
-		this->Ar = A;
+	Array(int size){
 		this->size = size;
-		this->length = length;
+		this->length = 0;
+		this->Ar = new int [size];
+	}
+
+	Array(){
+		this->Ar = new int[10];
+		this->size = 10;
+		this->length = 0;
+	}
+
+	~Array(){
+		delete [] Ar;
 	}
 
 	// print all the element present in the array
 	void print_array(){
 		cout << "---------------------------------"<<endl;
-		cout <<"Array size : "<< size << endl;
-		cout <<"Array length : "<< length << endl;
+		cout <<"Array size : "<< this->size << endl;
+		cout <<"Array length : "<< this->length << endl;
 		cout << "elements of the array are : ";
 		for (int i = 0; i < this->length; i++)
 		{
@@ -223,7 +234,7 @@ public:
 		}
 	}
 
-	// check if the list is sorted or not
+	// check if the array is sorted or not
 	bool is_sorted(){
 		for(int i = 0;i < this->length -1 ;i++){
 			if(this->Ar[i] > this->Ar[i+1])
@@ -233,49 +244,3 @@ public:
 	}
 
 };
-
-
-int main(int argc, char const *argv[])
-{
-	
-	Array a(new int[3],3,0);
-	a.append(12);
-	a.append(17);
-	a.append(19);
-	//a.append(19);
-	a.print_array();
-
-	/* a.insert(0,99);
-	a.print_array();
-
-	a.delete_el(0);
-	a.print_array();
-
-	cout << "element found at index : "<<a.Binary_search_rec(19,a.length,0)<<endl;
-	cout << a.get(3)<<endl;
-	a.set(0,1000);
-	a.print_array();
-
-	a.reverse_array();
-	a.print_array();
-
-	cout << "max and min element in array are :  (max) "<<a.max()<<"  (min) "<<a.min()<<""<<endl;
-
-	cout << "sum of all el is "<<a.sum()<<endl;
-	cout << "avg of all el is "<<a.avg()<<endl;
-
-	cout << " rotate the array to left "<<endl;
-	a.rotate("left");
-	a.print_array();
-	cout << " rotate the array to right "<<endl;
-	a.rotate("right");
-	a.print_array(); */
-
-	a.insert_sorted_array(15);
-	//a.insert_sorted_array(16);
-	//a.insert_sorted_array(99);
-
-	a.print_array();
-
-	return 0;
-}
