@@ -16,12 +16,14 @@ public:
 	int size;
 	int length;
 
+	// array constructor 
 	Array(int *A,int size,int length){
 		this->Ar = A;
 		this->size = size;
 		this->length = length;
 	}
 
+	// print all the element present in the array
 	void print_array(){
 		cout << "---------------------------------"<<endl;
 		cout <<"Array size : "<< size << endl;
@@ -35,6 +37,8 @@ public:
 		cout << "---------------------------------"<<endl;
 
 	}
+
+	// this method will resize the array to  size * 2
 	void resize_array(int new_size,int old_size){
 	int *temp = new int[new_size];
 
@@ -48,13 +52,15 @@ public:
 	
 	this->Ar = temp;
 
-	delete [] temp;
+	temp = nullptr;
 	this->size = new_size;
 	}
 
 
+	// append an element at the end of the array
+
 	void append(int element){
-    	if(length == size){
+    	if(this->length == this->size){
     		// resize the array 
     		resize_array(this->size * 2 ,this->size);
     		this->Ar[length] = element;
@@ -65,6 +71,8 @@ public:
     		length ++;
     	}
     }
+
+    // insert the element at a given index
 
     void insert(int index,int element){
 		// implement resize of array.
@@ -81,6 +89,8 @@ public:
     	
     }
 
+    // delete element from a given index
+
     void delete_el(int index){
 		if(index >= 0 &&  index < length){
 			int x = this->Ar[index];
@@ -94,6 +104,8 @@ public:
 			
 		}
 	}
+
+ 	// Binary search for searching element in array
 
 	int Binary_search_rec(int key,int h,int l){
 		if(l <= h){
@@ -192,6 +204,34 @@ public:
 		}
 	}
 
+	// insert element in sorted list
+
+	void insert_sorted_array(int el){
+		if(is_sorted()){
+			if(this->length == this->size)
+				resize_array(this->size * 2,this->size);
+			int i = length - 1;
+			while(this->Ar[i] > el){
+				this->Ar[i+1] = this->Ar[i];
+				i--;
+			}
+			this->Ar[i+1] = el;
+			this->length ++;
+		}
+		else{
+			cout << "Array not sorted !!"<<endl;
+		}
+	}
+
+	// check if the list is sorted or not
+	bool is_sorted(){
+		for(int i = 0;i < this->length -1 ;i++){
+			if(this->Ar[i] > this->Ar[i+1])
+				return false;
+		}
+		return true;
+	}
+
 };
 
 
@@ -200,12 +240,12 @@ int main(int argc, char const *argv[])
 	
 	Array a(new int[3],3,0);
 	a.append(12);
-	a.append(13);
-	a.append(14);
+	a.append(17);
 	a.append(19);
+	//a.append(19);
 	a.print_array();
 
-	a.insert(0,99);
+	/* a.insert(0,99);
 	a.print_array();
 
 	a.delete_el(0);
@@ -229,6 +269,12 @@ int main(int argc, char const *argv[])
 	a.print_array();
 	cout << " rotate the array to right "<<endl;
 	a.rotate("right");
+	a.print_array(); */
+
+	a.insert_sorted_array(15);
+	//a.insert_sorted_array(16);
+	//a.insert_sorted_array(99);
+
 	a.print_array();
 
 	return 0;
