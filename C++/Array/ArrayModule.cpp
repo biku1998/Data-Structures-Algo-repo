@@ -1,6 +1,8 @@
 /* Array  ADT(abstract data-type)
 author : Sourabh kumar
-
+Implementing basic functionality of array.
+The array is resizable i.e automatically make size = size*2 when full.
+The array is created and maintained in heap not stack.
 */
 
 #include <iostream>
